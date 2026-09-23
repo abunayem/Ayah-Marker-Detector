@@ -1,0 +1,35 @@
+# Python environment
+env/
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary SQLite Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary crop and debug images
+crop_*.png
+page*_*.png
+debug_*.png
+patch_*.png
+real_marker_*.png
+template_candidate_*.png
+template_custom.png
+res.png
+row_sums.png
+page_starts*.png
+
+# Temporary reports
+*.txt
+!requirements.txt
+*.sql
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
