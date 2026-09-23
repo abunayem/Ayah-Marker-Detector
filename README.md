@@ -2,6 +2,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green.svg)](https://opencv.org/)
+[![Android App Demo](https://img.shields.io/badge/Android%20Demo-APK%20Included-brightgreen.svg)](demo/AyahMarker-LiveDemo.apk)
 [![License](https://img.shields.io/badge/license-MIT-purple.svg)](LICENSE)
 
 An interactive, high-precision desktop workstation built with **Python**, **OpenCV**, and **Tkinter** for detecting, visually validating, and cataloging Ayah marker coordinates across custom Indo-Pak, Emdadia, and standard Mushaf scripts.
@@ -10,7 +11,19 @@ The generated coordinates serve as the foundational dataset for compilation into
 
 ---
 
-## ✨ Features
+## 📱 Live Demo Android App
+
+A ready-to-install Android APK is included directly in this repository for live testing:
+
+* 📦 **Download Live Demo APK**: **[demo/AyahMarker-LiveDemo.apk](demo/AyahMarker-LiveDemo.apk)** (Direct download)
+* **What's included in the Demo App**:
+  * Complete Indo-Pak 15-line Emdadia Mushaf reader (all 611 pages).
+  * Interactive, verse-by-verse highlighting powered by the generated `ayahinfo.db` database.
+  * Verified transitions across all 114 Surahs (including Surahs 68, 81, 82, 91, 92) with zero false overlaps on Sura headers or Bismillah lines.
+
+---
+
+## ✨ Application Features
 
 ### 🖥️ Modern Centered Workspace
 - **Centered Canvas Layout**: The Quran page is dynamically centered in the viewing area on any display or widescreen resolution, eliminating awkward side voids.
