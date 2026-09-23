@@ -1,4 +1,4 @@
-# 📖 Ayah Marker Detector & Validator (Pro Edition)
+# 📖 Ayah Marker Detector & Validator
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green.svg)](https://opencv.org/)
