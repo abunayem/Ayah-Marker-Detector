@@ -20,6 +20,7 @@ A ready-to-install Android APK is included directly in this repository for live 
   * Complete Indo-Pak 15-line Emdadia Mushaf reader (all 611 pages).
   * Interactive, verse-by-verse highlighting powered by the generated `ayahinfo.db` database.
   * Verified transitions across all 114 Surahs (including Surahs 68, 81, 82, 91, 92) with zero false overlaps on Sura headers or Bismillah lines.
+  * **Full Ayah End Marker Highlighting**: Verses now encompass 100% of their end marker medallions, with cleanly separated boundaries and zero bleed or overlap onto adjacent verses.
 
 ---
 

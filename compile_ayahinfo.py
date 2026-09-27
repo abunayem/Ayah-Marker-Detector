@@ -132,18 +132,22 @@ def compile_db(raw_db_path, out_db_path, img_dir):
     # Generate segments
     last_seen_sura = 1
     transition_skips = 0
+    marker_radius = 36.0    # Full marker radius in pixels
+    min_word_width = 130.0   # Minimum pixels for legitimate word remainder
     for i, line in enumerate(all_lines):
         current_right_x = line['global_max_x']
         
         for m in line['circles']:
             pg, sura, ayah, cx, cy = m
-            left_pct = cx / float(line['width'])
+            # Ayah ending includes the full marker circle up to its left outer edge
+            marker_left_x = max(line['global_min_x'], cx - marker_radius)
+            left_pct = marker_left_x / float(line['width'])
             right_pct = current_right_x / float(line['width'])
             cursor_out.execute('''
                 INSERT INTO ayah_highlights (page, sura, ayah, line, "left", "right")
                 VALUES (?, ?, ?, ?, ?, ?)
             ''', (pg, sura, ayah, line['line_idx'], left_pct, right_pct))
-            current_right_x = cx
+            current_right_x = marker_left_x
             last_seen_sura = sura
             transition_skips = 0
 
@@ -172,13 +176,20 @@ def compile_db(raw_db_path, out_db_path, img_dir):
 
             # ONLY highlight the remainder of the line if it belongs to the SAME Sura!
             if n_sura == last_seen_sura:
-                left_pct = line['global_min_x'] / float(line['width'])
-                right_pct = current_right_x / float(line['width'])
-                if current_right_x - line['global_min_x'] > 20: # only if significant width remains
+                if current_right_x - line['global_min_x'] >= min_word_width:
+                    left_pct = line['global_min_x'] / float(line['width'])
+                    right_pct = current_right_x / float(line['width'])
                     cursor_out.execute('''
                         INSERT INTO ayah_highlights (page, sura, ayah, line, "left", "right")
                         VALUES (?, ?, ?, ?, ?, ?)
                     ''', (line['page'], n_sura, n_ayah, line['line_idx'], left_pct, right_pct))
+                elif len(line['circles']) > 0:
+                    # If only margin space remained after the last circle, extend the last circle's ayah to the margin
+                    cursor_out.execute('''
+                        UPDATE ayah_highlights
+                        SET "left" = ?
+                        WHERE ayah_id = (SELECT MAX(ayah_id) FROM ayah_highlights)
+                    ''', (line['global_min_x'] / float(line['width']),))
 
     conn_out.commit()
     conn_out.close()
